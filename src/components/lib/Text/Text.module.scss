@@ -1,0 +1,15 @@
+.body1 {
+  @apply font-inter text-sm md:text-base;
+}
+
+.body2 {
+  @apply font-inter text-base md:text-lg;
+}
+
+.subheading {
+  @apply font-inter text-lg md:text-xl;
+}
+
+.caption {
+  @apply font-inter text-xs md:text-sm;
+}
