@@ -1,0 +1,7 @@
+.loader__container {
+  @apply flex w-full items-center justify-center font-inter;
+}
+
+.loader__svg {
+  @apply inline h-4 w-4 animate-spin text-gray-200;
+}

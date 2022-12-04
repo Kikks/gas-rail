@@ -1,5 +1,6 @@
+import './Heading.scss';
+
 import match from '../../../utils/match';
-import styles from './Heading.module.scss';
 import type HeadingProps from './Heading.props';
 
 const Heading = ({
@@ -11,9 +12,9 @@ const Heading = ({
   const Component = variant || 'h2';
 
   const headingClassName = match(variant, {
-    h1: styles.h1,
-    h2: styles.h2,
-    h3: styles.h3,
+    h1: 'heading__h1',
+    h2: 'heading__h2',
+    h3: 'heading__h3',
     default: '',
   });
 

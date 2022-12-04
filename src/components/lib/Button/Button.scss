@@ -1,9 +1,9 @@
-.base {
+.button__base {
   @apply rounded-md rounded-2xl font-inter font-semibold
   transition-all disabled:hover:cursor-not-allowed;
 }
 
-.size {
+.button__size {
   &__small {
     @apply min-w-[120px] px-3 py-3 text-base 
     lg:min-w-[150px] lg:py-3;
@@ -20,7 +20,7 @@
   }
 }
 
-.variant {
+.button__variant {
   &__solid {
     @apply border border-transparent bg-primary-main text-white hover:bg-primary-dark 
     disabled:bg-gray-300 disabled:text-gray-500;

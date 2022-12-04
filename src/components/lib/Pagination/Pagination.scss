@@ -1,21 +1,21 @@
-.wrapper {
+.pagination__wrapper {
   @apply my-4 flex justify-end gap-5;
 }
 
-.container {
+.pagination__container {
   @apply flex items-center;
 }
 
-.page {
+.pagination__page {
   @apply flex h-7 w-7 items-center justify-center text-xs;
 }
 
-.active__page {
+.pagination__active__page {
   @apply flex h-7 w-7 items-center 
   justify-center rounded-md bg-black/5 text-xs;
 }
 
-.navigator {
+.pagination__navigator {
   @apply flex h-7 cursor-pointer items-center justify-center 
     px-2 disabled:cursor-not-allowed;
 

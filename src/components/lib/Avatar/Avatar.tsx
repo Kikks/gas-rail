@@ -1,13 +1,14 @@
+import './Avatar.scss';
+
 import type { FC } from 'react';
 
-import styles from './Avatar.module.scss';
 import type AvatarProps from './Avatar.props';
 
 const Avatar: FC<AvatarProps> = ({ name, image, className }) => {
   if (image)
     return (
       <figure
-        className={`${styles.image} ${
+        className={`${'avatar__image'} ${
           className || ''
         } relative overflow-hidden`}
       >
@@ -17,7 +18,7 @@ const Avatar: FC<AvatarProps> = ({ name, image, className }) => {
 
   if (name)
     return (
-      <span className={`${styles.name} ${className || ''}`}>
+      <span className={`${'avatar__name'} ${className || ''}`}>
         {name.length > 3
           ? name
               .split(' ')
@@ -29,9 +30,9 @@ const Avatar: FC<AvatarProps> = ({ name, image, className }) => {
     );
 
   return (
-    <div className={`${styles.icon} ${className || ''}`}>
+    <div className={`${'avatar__icon'} ${className || ''}`}>
       <svg
-        className={styles.icon}
+        className={'avatar__icon'}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"

@@ -1,11 +1,11 @@
-import type { FC } from 'react';
+import './Table.scss';
 
-import styles from './Table.module.scss';
+import type { FC } from 'react';
 
 const Table: FC = ({ children }) => {
   return (
-    <div className={styles.container}>
-      <table className={styles.table}>{children}</table>
+    <div className="table_container">
+      <table className="table">{children}</table>
     </div>
   );
 };

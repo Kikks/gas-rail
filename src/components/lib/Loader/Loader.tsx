@@ -1,14 +1,15 @@
+import './Loader.scss';
+
 import type { FC } from 'react';
 
-import styles from './Loader.module.scss';
 import type LoaderProps from './Loader.props';
 
 const Loader: FC<LoaderProps> = ({ color = '#fff', small = false }) => {
   return (
-    <div className={styles.container} style={{ color }}>
+    <div className={'loader__container'} style={{ color }}>
       <svg
         role="status"
-        className={`${styles.svg} ${small ? 'mr-0' : 'mr-2'}`}
+        className={`${'loader__svg'} ${small ? 'mr-0' : 'mr-2'}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

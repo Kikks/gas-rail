@@ -1,8 +1,9 @@
+import './Button.scss';
+
 import type { FC } from 'react';
 
 import match from '../../../utils/match';
 import Loader from '../Loader';
-import styles from './Button.module.scss';
 import type ButtonProps from './Button.props';
 
 const Button: FC<ButtonProps> = ({
@@ -15,25 +16,25 @@ const Button: FC<ButtonProps> = ({
   ...rest
 }) => {
   const buttonSize = match(size, {
-    small: styles.size__small,
-    medium: styles.size__medium,
-    large: styles.size__large,
+    small: 'button__size__small',
+    medium: 'button__size__medium',
+    large: 'button__size__large',
     default: '',
   });
 
   const buttonVariant = match(variant, {
-    solid: styles.variant__solid,
-    outline: styles.variant__outline,
-    border: styles.variant__border,
-    white: styles.variant__white,
-    black: styles.variant__black,
+    solid: 'button__variant__solid',
+    outline: 'button__variant__outline',
+    border: 'button__variant__border',
+    white: 'button__variant__white',
+    black: 'button__variant__black',
     default: '',
   });
 
   return (
     <button
       disabled={loading || disabled}
-      className={`${styles.base} ${buttonSize} ${buttonVariant} ${
+      className={`${'button__base'} ${buttonSize} ${buttonVariant} ${
         loading ? 'cursor-wait' : ''
       } ${className || ''}`}
       {...rest}
