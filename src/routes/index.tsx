@@ -9,6 +9,7 @@ import Login from '../pages/login';
 import Order from '../pages/order';
 import Retail from '../pages/outlets/retail';
 import Supply from '../pages/outlets/supply';
+import APIKeys from '../pages/settings/keys';
 
 const Redirect: FC<{ route: string }> = ({ route }) => {
   useEffect(() => {
@@ -29,6 +30,9 @@ const ApplicationRoutes = () => {
       <Route path="/outlets/supply" element={<Supply />} />
       <Route path="/outlets/retail" element={<Retail />} />
       <Route path="/support" element={<Dashboard />} />
+      <Route path="/settings" element={<Redirect route="/settings/keys" />} />
+      <Route path="/settings/keys" element={<APIKeys />} />
+
       <Route path="/login" element={<Login />} />
     </Routes>
   );

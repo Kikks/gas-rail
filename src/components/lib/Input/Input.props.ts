@@ -6,4 +6,5 @@ export default interface InputProps extends React.HTMLProps<HTMLInputElement> {
   label?: string;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  containerClassName?: string;
 }

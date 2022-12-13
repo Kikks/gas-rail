@@ -11,6 +11,8 @@ const Input: FC<InputProps> = ({
   startIcon,
   endIcon,
   required,
+  containerClassName,
+  className,
   ...rest
 }) => {
   return (
@@ -29,7 +31,7 @@ const Input: FC<InputProps> = ({
             endIcon ? 'pr-4' : ''
           } bg-[#fefefe] focus-within:border-primary-main ${
             error ? 'border-red-500' : 'border-gray-300'
-          }`}
+          } ${containerClassName || 'containerClassName'}`}
         >
           {startIcon && startIcon}
 
@@ -37,7 +39,7 @@ const Input: FC<InputProps> = ({
             id={id}
             className={`flex-1 border-none bg-transparent py-3 px-5 text-sm outline-none placeholder:text-gray-400 focus:border-none ${
               startIcon ? 'ml-2 pl-0' : ''
-            } ${endIcon ? 'mr-2 pr-0' : ''}`}
+            } ${endIcon ? 'mr-2 pr-0' : ''} ${className || ''}`}
             {...rest}
           />
 
