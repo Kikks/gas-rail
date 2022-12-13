@@ -1,4 +1,4 @@
-import './Tables.scss';
+import './Tables.css';
 
 import type { FC, PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ const TableCell: FC<PropsWithChildren<TableCellProps>> = ({
     <td onClick={onClick} className="table__cell">
       {url ? (
         <Link to={url} className="w-full">
-          <a>{children}</a>
+          <span>{children}</span>
         </Link>
       ) : (
         children

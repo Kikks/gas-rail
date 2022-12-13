@@ -1,0 +1,22 @@
+.table_container {
+  @apply relative w-full overflow-x-auto bg-white;
+}
+
+.table {
+  @apply min-w-full text-left text-sm;
+}
+.table__header_row {
+  @apply divide-x border-b text-gray-800;
+}
+
+.table__header_cell {
+  @apply whitespace-nowrap px-4 py-3;
+}
+
+.table__row {
+  @apply border border-black/5 bg-transparent hover:bg-[#f6f0ec];
+}
+
+.table__cell {
+  @apply whitespace-nowrap px-4 py-3;
+}

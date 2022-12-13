@@ -1,4 +1,4 @@
-import './Tables.scss';
+import './Tables.css';
 
 import type { FC, PropsWithChildren } from 'react';
 
