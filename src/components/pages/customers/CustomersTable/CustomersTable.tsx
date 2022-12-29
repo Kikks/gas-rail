@@ -1,8 +1,10 @@
 import { Icon } from '@iconify/react';
+import moment from 'moment';
+import type { FC } from 'react';
 
 import Avatar from '../../../lib/Avatar';
 import Checkbox from '../../../lib/Checkbox';
-import Chip from '../../../lib/Chip';
+// import Chip from '../../../lib/Chip';
 import Pagination from '../../../lib/Pagination';
 import {
   Table,
@@ -12,9 +14,9 @@ import {
   TableRow,
 } from '../../../lib/Table';
 import Text from '../../../lib/Text';
-import { data } from './data';
+import type CustomerTableProps from './CustomerTable.props';
 
-const CustomersTable = () => {
+const CustomersTable: FC<CustomerTableProps> = ({ data }) => {
   return (
     <div className="w-full overflow-hidden">
       <Table>
@@ -22,64 +24,68 @@ const CustomersTable = () => {
           showCheckbox
           items={[
             'User',
-            'Estimated Tank Storage',
+            'Estimated Tank Storage (kg)',
             'Address',
-            'Last Order',
+            'Created At',
             'Gas Level',
           ]}
         />
         <TableBody>
-          {data.map((order, index) => (
+          {data.map((device, index) => (
             <TableRow key={index}>
-              <TableCell url={`/customers/1`}>
+              <TableCell url={`/customers/${device.id}`}>
                 <div className="hidden items-center justify-center gap-3 group-hover:flex">
                   <Checkbox />
                 </div>
               </TableCell>
-              <TableCell url={`/customers/1`}>
+              <TableCell url={`/customers/${device.id}`}>
                 <div className="flex items-center gap-3">
                   <Avatar
                     className="h-9 w-9"
-                    image={order.image}
-                    name={order.name}
+                    name={`${device.first_name} ${device.last_name}`}
                   />
-                  <Text variant="caption">{order.name}</Text>
+                  <Text variant="caption">{`${device.first_name} ${device.last_name}`}</Text>
 
-                  {order.retailer && <Chip>Retail Agent</Chip>}
+                  {/* {device.retailer && <Chip>Retail Agent</Chip>} */}
                 </div>
               </TableCell>
 
-              <TableCell url={`/customers/1`}>
-                <Text variant="caption">{order.estimated_tank_storage}</Text>
+              <TableCell url={`/customers/${device.id}`}>
+                <Text variant="caption">
+                  {device?.tank_storage?.value || 0}
+                </Text>
               </TableCell>
 
-              <TableCell url={`/customers/1`}>
-                <Text variant="caption">{order.address}</Text>
+              <TableCell url={`/customers/${device.id}`}>
+                <Text variant="caption">{device.address}</Text>
               </TableCell>
 
-              <TableCell url={`/customers/1`}>
+              <TableCell url={`/customers/${device.id}`}>
                 <div className="flex items-center gap-3">
                   <Icon
                     icon="mdi:calendar-blank-outline"
                     className="text-lg text-black/40"
                   />
-                  <Text variant="caption">{order.last_order}</Text>
+                  <Text variant="caption">
+                    {moment(device.created_on).format('DD, MMM YYYY')}
+                  </Text>
                 </div>
               </TableCell>
 
-              <TableCell url={`/customers/1`}>
+              <TableCell url={`/customers/${device.id}`}>
                 <div className="flex items-center gap-2">
                   <figure className="h-6 w-6">
                     <img
-                      src={`/assets/icons/${order.gas_level.level}.svg`}
-                      alt={order.gas_level.level}
+                      src={`/assets/icons/full.svg`}
+                      alt=""
                       className="h-full w-full object-contain"
                     />
                   </figure>
 
                   <div className="flex">
                     <Text variant="caption" className="capitalize">
-                      {order.gas_level.level}, {order.gas_level.amount}
+                      Full, {device.tank_storage?.value || 0}/
+                      {device.tank_storage?.value || 0}kg
                     </Text>
                   </div>
                 </div>

@@ -8,7 +8,7 @@ const Checkbox: FC<CheckboxProps> = ({ label, id, ...rest }) => {
       <input
         id={id}
         type="checkbox"
-        className="h-4 w-4 rounded border-gray-300 bg-gray-200 text-primary-main focus:ring-2 focus:ring-primary-main"
+        className="h-4 w-4 rounded border-gray-300 text-primary-main focus:ring-2 focus:ring-primary-main"
         {...rest}
       />
       {label && (

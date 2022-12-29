@@ -1,11 +1,19 @@
 import { Icon } from '@iconify/react';
 import type { FC } from 'react';
 
+import useAppDispatch from '../../../hooks/useAppDispatch';
+import { logout } from '../../../store/slices/userSlice';
 import { links } from './data';
 import type SideNavProps from './SideNav.props';
 import SideNavLink from './SideNavLink';
 
 const SideNav: FC<SideNavProps> = ({ isOpen, onClose }) => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       {isOpen && (
@@ -53,6 +61,13 @@ const SideNav: FC<SideNavProps> = ({ isOpen, onClose }) => {
           url="/settings"
           icon="material-symbols:settings-outline"
           title="Settings"
+        />
+
+        <SideNavLink
+          url="/login"
+          icon="ant-design:logout-outlined"
+          title="Logout"
+          onClick={handleLogout}
         />
       </aside>
     </>

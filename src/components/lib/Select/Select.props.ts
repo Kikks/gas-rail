@@ -7,4 +7,6 @@ export default interface SelectProps
     value: string | number;
     label: string;
   }[];
+  variant?: 'outline' | 'contained';
+  containerClassName?: string;
 }

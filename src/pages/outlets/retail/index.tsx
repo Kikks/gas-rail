@@ -75,7 +75,7 @@ const Retail = () => {
             </div>
           </div>
 
-          <CustomersTable />
+          <CustomersTable data={[]} />
         </div>
       </div>
     </AuthLayout>

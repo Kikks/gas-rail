@@ -1,5 +1,5 @@
 .button__base {
-  @apply rounded-md rounded-2xl font-inter font-semibold
+  @apply rounded-2xl font-inter font-semibold
   transition-all disabled:hover:cursor-not-allowed;
 }
 

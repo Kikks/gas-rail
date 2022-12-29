@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import match from '../../../utils/match';
 import Text from '../Text';
 import type InputProps from './Input.props';
 
@@ -13,8 +14,22 @@ const Input: FC<InputProps> = ({
   required,
   containerClassName,
   className,
+  variant = 'contained',
   ...rest
 }) => {
+  const inputVariantStyles = match(variant, {
+    outline: 'font-bold placeholder:text-black/50 disabled:text-black/30',
+    contained: 'placeholder:text-gray-400 bg-[#fefefe]',
+    default: '',
+  });
+
+  const inputContainerVariantStyles = match(variant, {
+    outline:
+      'rounded-none bg-[rgba(0,0,0,0)] border border-[#caa593] max-w-none',
+    contained: 'max-w-[700px] items-center rounded-2xl border',
+    default: '',
+  });
+
   return (
     <div className="w-full">
       {label && (
@@ -25,19 +40,17 @@ const Input: FC<InputProps> = ({
 
       <div className={`w-full ${label ? 'mt-2' : ''}`}>
         <div
-          className={`mx-auto flex w-full max-w-[700px] items-center overflow-hidden rounded-2xl border ${
+          className={`mx-auto flex w-full items-center overflow-hidden focus-within:border-primary-main ${inputContainerVariantStyles} ${
             startIcon ? 'pl-4' : ''
-          } ${
-            endIcon ? 'pr-4' : ''
-          } bg-[#fefefe] focus-within:border-primary-main ${
+          } ${endIcon ? 'pr-4' : ''} ${
             error ? 'border-red-500' : 'border-gray-300'
-          } ${containerClassName || 'containerClassName'}`}
+          } ${containerClassName || ''}`}
         >
           {startIcon && startIcon}
 
           <input
             id={id}
-            className={`flex-1 border-none bg-transparent py-3 px-5 text-sm outline-none placeholder:text-gray-400 focus:border-none ${
+            className={`flex-1 border-none bg-transparent py-3 px-5 text-sm outline-none focus:border-none disabled:cursor-not-allowed ${inputVariantStyles} ${
               startIcon ? 'ml-2 pl-0' : ''
             } ${endIcon ? 'mr-2 pr-0' : ''} ${className || ''}`}
             {...rest}
