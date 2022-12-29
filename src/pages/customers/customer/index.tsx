@@ -67,14 +67,20 @@ const Customer = () => {
           </button>
         </div>
 
-        <div className="col-span-1 grid gap-7">
-          <CustomerProfile device={device} toggleShowModal={toggleShowModal} />
-          <Stats device={device} loading={isLoading} />
-          <Activities deviceStreams={deviceStreams} />
+        <div className="col-span-2 grid grid-cols-2 gap-7">
+          <div className="flex flex-col gap-7">
+            <CustomerProfile
+              device={device}
+              toggleShowModal={toggleShowModal}
+            />
+            <Stats device={device} loading={isLoading} />
+          </div>
+
+          <GasConsumptionLevel device={device} />
         </div>
 
-        <div className="col-span-1 grid content-start items-start gap-7">
-          <GasConsumptionLevel device={device} />
+        <div className="col-span-2">
+          <Activities deviceStreams={deviceStreams} />
         </div>
       </div>
 

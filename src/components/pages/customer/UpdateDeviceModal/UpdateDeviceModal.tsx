@@ -187,8 +187,8 @@ const UpdateDeviceModal: FC<UpdateDeviceModalProps> = ({
         />
 
         <Input
-          label="Threshold"
-          placeholder="Enter Threshold"
+          label="Threshold (kg)"
+          placeholder="Enter Threshold in kg"
           name="threshold"
           value={payload.threshold}
           onChange={handleChange}

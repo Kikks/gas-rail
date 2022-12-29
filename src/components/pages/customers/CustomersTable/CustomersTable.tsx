@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import moment from 'moment';
 import type { FC } from 'react';
 
+import { convertKgToLitre } from '../../../../utils/misc';
 import Avatar from '../../../lib/Avatar';
 import Checkbox from '../../../lib/Checkbox';
 // import Chip from '../../../lib/Chip';
@@ -24,7 +25,7 @@ const CustomersTable: FC<CustomerTableProps> = ({ data }) => {
           showCheckbox
           items={[
             'User',
-            'Estimated Tank Storage (kg)',
+            'Estimated Tank Storage',
             'Address',
             'Created At',
             'Gas Level',
@@ -52,7 +53,11 @@ const CustomersTable: FC<CustomerTableProps> = ({ data }) => {
 
               <TableCell url={`/customers/${device.id}`}>
                 <Text variant="caption">
-                  {device?.tank_storage?.value || 0}
+                  {device?.tank_storage?.value || 0}kg /{' '}
+                  {device?.tank_storage?.value
+                    ? convertKgToLitre(device?.tank_storage.value)
+                    : 0}
+                  L
                 </Text>
               </TableCell>
 

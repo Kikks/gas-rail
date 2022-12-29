@@ -42,3 +42,19 @@ export const convertQueryToString = (query: {
     .map((entry) => `${entry[0]}=${entry[1]}`)
     .join('&')}`;
 };
+
+export const convertM3ToKg = (value: number = 0) => {
+  return (1.887 * value).toFixed(1);
+};
+
+export const convertM3ToLitre = (value: number = 0) => {
+  return (value * 0.27).toFixed(1);
+};
+
+export const convertLitreToKg = (value: number = 0) => {
+  return (value * 0.51).toFixed(1);
+};
+
+export const convertKgToLitre = (value: number = 0) => {
+  return (value / 0.51).toFixed(1);
+};

@@ -1,14 +1,40 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 
+import { convertM3ToKg } from '../../../../utils/misc';
 import Card from '../../../lib/Card';
 import Text from '../../../lib/Text';
 import type GasConsumptionLevelProps from './GasConsumptionLevel.props';
 
 const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
+  const guageIndicatorPosition = useMemo(() => {
+    return {
+      bottom: `${
+        // Please remove this mess of a ternary check once Akin has fixed the
+        // total_accumulated_flow_rate issue
+        // eslint-disable-next-line no-nested-ternary
+        device?.threshold &&
+        device?.tank_storage &&
+        device.total_accumulated_flow_rate
+          ? device.total_accumulated_flow_rate < device.tank_storage.value
+            ? `${
+                (Number(device.threshold) / Number(device.tank_storage.value)) *
+                100
+              }%`
+            : '100%'
+          : '0%'
+      }`,
+    };
+  }, [
+    device?.threshold,
+    device?.tank_storage,
+    device?.total_accumulated_flow_rate,
+  ]);
+
   return (
     <Card title="Gas Consumption Levels">
-      <div className="grid grid-cols-2 items-center justify-items-center">
-        <figure className="relative col-span-1 aspect-square">
+      <div className="flex h-full w-full justify-center gap-5 self-stretch pl-5 pr-28 2xl:gap-10">
+        <figure className="relative aspect-[5/10] h-[100%]">
           <img
             src="/assets/icons/big-gas.svg"
             alt="Gas"
@@ -23,10 +49,10 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
           </div>
         </figure>
 
-        <div className="col-span-1 grid w-full grid-cols-2 gap-2 self-stretch">
+        <div className="grid justify-start self-stretch">
           {device?.tank_storage && (
             <>
-              <figure className="relative col-span-1 aspect-[5/13] w-full">
+              <figure className="relative col-span-1 aspect-[1/4] h-[100%]">
                 <img
                   src="/assets/icons/guage.svg"
                   alt="Gas"
@@ -34,7 +60,30 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
                 />
 
                 <div
-                  className={`absolute flex translate-y-[50%] items-center gap-5`}
+                  className={`absolute left-[100%] translate-y-[50%] rounded-full py-1 px-3 ${
+                    Number(convertM3ToKg(device.total_accumulated_flow_rate)) <
+                    0.25 * (device?.tank_storage.value || 0)
+                      ? 'bg-[#e55252]'
+                      : 'bg-[#8ABC82]'
+                  }`}
+                  style={guageIndicatorPosition}
+                >
+                  <Text className="text-xs font-bold text-white">
+                    {(device?.tank_storage.value || 0) -
+                      Number(convertM3ToKg(device.total_accumulated_flow_rate))}
+                    kg
+                  </Text>
+                </div>
+
+                <img
+                  src="/assets/icons/guage-level.svg"
+                  alt="Gas"
+                  className="absolute left-[50%] h-10 w-10 origin-center translate-y-[50%] translate-x-[-50%] object-contain"
+                  style={guageIndicatorPosition}
+                />
+
+                <div
+                  className={`absolute flex translate-y-[50%] items-center gap-2`}
                   style={{
                     bottom: `${
                       device?.threshold && device?.tank_storage
@@ -69,12 +118,6 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
                   </div>
                 </div>
               </figure>
-
-              <div className="flex flex-col items-start justify-between">
-                <div className="mt-16 rounded-full bg-[#8ABC82] py-1 px-3">
-                  <Text className="font-bold text-white">+26.37</Text>
-                </div>
-              </div>
             </>
           )}
         </div>
