@@ -9,7 +9,7 @@ import type GasConsumptionLevelProps from './GasConsumptionLevel.props';
 const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
   const guageIndicatorPosition = useMemo(() => {
     return {
-      bottom: `${
+      top: `${
         // Please remove this mess of a ternary check once Akin has fixed the
         // total_accumulated_flow_rate issue
         // eslint-disable-next-line no-nested-ternary
@@ -18,7 +18,10 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
         device.total_accumulated_flow_rate
           ? device.total_accumulated_flow_rate < device.tank_storage.value
             ? `${
-                (Number(device.threshold) / Number(device.tank_storage.value)) *
+                (Number(
+                  convertM3ToKg(Number(device.total_accumulated_flow_rate))
+                ) /
+                  Number(device.tank_storage.value)) *
                 100
               }%`
             : '100%'
@@ -33,7 +36,7 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
 
   return (
     <Card title="Gas Consumption Levels">
-      <div className="flex h-full w-full justify-center gap-5 self-stretch pl-5 pr-28 2xl:gap-10">
+      <div className="flex h-full w-full justify-center gap-16 self-stretch pl-5 pr-44 2xl:gap-20">
         <figure className="relative aspect-[5/10] h-[100%]">
           <img
             src="/assets/icons/big-gas.svg"
@@ -60,7 +63,7 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
                 />
 
                 <div
-                  className={`absolute left-[100%] translate-y-[50%] rounded-full py-1 px-3 ${
+                  className={`absolute left-[-60%] translate-y-[-50%] rounded-full py-1 px-3 ${
                     Number(convertM3ToKg(device.total_accumulated_flow_rate)) <
                     0.25 * (device?.tank_storage.value || 0)
                       ? 'bg-[#e55252]'
@@ -78,7 +81,7 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
                 <img
                   src="/assets/icons/guage-level.svg"
                   alt="Gas"
-                  className="absolute left-[50%] h-10 w-10 origin-center translate-y-[50%] translate-x-[-50%] object-contain"
+                  className="absolute left-[50%] h-10 w-10 origin-center translate-y-[-50%] translate-x-[-50%] object-contain"
                   style={guageIndicatorPosition}
                 />
 
@@ -105,8 +108,13 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
 
                   <div className="flex flex-col">
                     <div className="flex items-center">
-                      <Text>{device?.threshold}</Text>
-                      <Text className="font-semibold text-black/50">kg</Text>
+                      <Text variant="caption">{device?.threshold}</Text>
+                      <Text
+                        variant="caption"
+                        className="font-semibold text-black/50"
+                      >
+                        kg
+                      </Text>
                     </div>
 
                     <Text
