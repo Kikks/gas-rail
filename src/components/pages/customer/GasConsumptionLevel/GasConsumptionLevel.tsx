@@ -15,12 +15,10 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
         // eslint-disable-next-line no-nested-ternary
         device?.threshold &&
         device?.tank_storage &&
-        device.total_accumulated_flow_rate
-          ? device.total_accumulated_flow_rate < device.tank_storage.value
+        device.accumulated_flow_rate
+          ? device.accumulated_flow_rate < device.tank_storage.value
             ? `${
-                (Number(
-                  convertM3ToKg(Number(device.total_accumulated_flow_rate))
-                ) /
+                (Number(convertM3ToKg(Number(device.accumulated_flow_rate))) /
                   Number(device.tank_storage.value)) *
                 100
               }%`
@@ -28,11 +26,7 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
           : '0%'
       }`,
     };
-  }, [
-    device?.threshold,
-    device?.tank_storage,
-    device?.total_accumulated_flow_rate,
-  ]);
+  }, [device?.threshold, device?.tank_storage, device?.accumulated_flow_rate]);
 
   return (
     <Card title="Gas Consumption Levels">
@@ -64,7 +58,7 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
 
                 <div
                   className={`absolute left-[-60%] translate-y-[-50%] rounded-full py-1 px-3 ${
-                    Number(convertM3ToKg(device.total_accumulated_flow_rate)) <
+                    Number(convertM3ToKg(device.accumulated_flow_rate)) <
                     0.25 * (device?.tank_storage.value || 0)
                       ? 'bg-[#e55252]'
                       : 'bg-[#8ABC82]'
@@ -73,7 +67,7 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
                 >
                   <Text className="text-xs font-bold text-white">
                     {(device?.tank_storage.value || 0) -
-                      Number(convertM3ToKg(device.total_accumulated_flow_rate))}
+                      Number(convertM3ToKg(device.accumulated_flow_rate))}
                     kg
                   </Text>
                 </div>
