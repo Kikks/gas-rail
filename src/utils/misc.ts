@@ -48,7 +48,7 @@ export const convertM3ToKg = (value: number = 0) => {
 };
 
 export const convertM3ToLitre = (value: number = 0) => {
-  return (value * 0.27).toFixed(1);
+  return (value / 0.27).toFixed(1);
 };
 
 export const convertLitreToKg = (value: number = 0) => {

@@ -58,8 +58,9 @@ const GasConsumptionLevel: FC<GasConsumptionLevelProps> = ({ device }) => {
 
                 <div
                   className={`absolute left-[-60%] translate-y-[-50%] rounded-full py-1 px-3 ${
-                    Number(convertM3ToKg(device.accumulated_flow_rate)) <
-                    0.25 * (device?.tank_storage.value || 0)
+                    (device?.tank_storage.value || 0) -
+                      Number(convertM3ToKg(device.accumulated_flow_rate)) <
+                    (device?.threshold || 0)
                       ? 'bg-[#e55252]'
                       : 'bg-[#8ABC82]'
                   }`}

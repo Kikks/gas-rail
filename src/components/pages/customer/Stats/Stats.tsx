@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { convertM3ToKg, convertM3ToLitre } from '../../../../utils/misc';
+import { convertKgToLitre } from '../../../../utils/misc';
 import StatCard from '../../../lib/StatCard';
 import type StatsProps from './Stats.props';
 
@@ -22,14 +22,12 @@ const Stats: FC<StatsProps> = ({ device, loading }) => {
         value={
           loading
             ? '...'
-            : `${convertM3ToKg(
-                Number(device?.total_accumulated_flow_rate || 0)
-              )}kg`
+            : `${Number(device?.total_accumulated_flow_rate || 0).toFixed(2)}kg`
         }
         subtitle={
           loading
             ? '...'
-            : `${convertM3ToLitre(
+            : `${convertKgToLitre(
                 Number(device?.total_accumulated_flow_rate || 0)
               )}L`
         }

@@ -1,4 +1,3 @@
-// import { Icon } from '@iconify/react';
 import type { FC } from 'react';
 import { useQuery } from 'react-query';
 
@@ -9,7 +8,6 @@ import { setBusinessData } from '../../../store/slices/businessSlice';
 import queryKeys from '../../../utils/api/queryKeys';
 import Avatar from '../../lib/Avatar';
 import Chip from '../../lib/Chip';
-// import Input from '../../lib/Input';
 import Text from '../../lib/Text';
 import type NavbarProps from './Navbar.props';
 
